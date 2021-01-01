@@ -8,3 +8,12 @@ export function addTask(description: string) {
     }
   };
 }
+
+export function doTask(id: string) {
+  return {
+    type: TaskListActionTypes.CHANGE_STATUS,
+    payload: {
+      id,
+    }
+  };
+}

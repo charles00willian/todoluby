@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import IApplicationState from '../../commons/interfaces/IApplicationState';
 import InputBar from '../../components/InputBar';
 import Task from '../../components/Task';
-import { addTask } from '../../store/modules/tasklist/actions';
+import { addTask, doTask } from '../../store/modules/tasklist/actions';
 import { 
   Container, 
   TaskList
@@ -14,7 +14,7 @@ import {
 
 const schema = Yup.object().shape({
   taskName: Yup.string()
-    .min(5, 'A tarefa deve ter mais de 5 caracteres!')
+    .min(5, 'A tarefa deve ter conter mais de 5 caracteres')
     .required('Descrição da tarefa é obrigatória'),
 })
 
@@ -23,8 +23,6 @@ interface FormValues {
 }
 
 export default function Home() {
-  const [inputText, setInputText] = useState('');
-
   const dispatch = useDispatch();
 
   const tasklist = useSelector((state: IApplicationState) => state.tasklist)
@@ -37,6 +35,10 @@ export default function Home() {
     formikHelpers.resetForm();
   };
 
+  const handleToggleTaks = (id: string) => {
+    dispatch(doTask(id));
+  }
+
   return (
     <Container>
       <Head>
@@ -46,35 +48,31 @@ export default function Home() {
 
       
       <Formik 
-        ref={() => ({as: 'as'})}
         initialValues={{
           taskName: ''
         } as FormValues} 
         onSubmit={handleSubmit}
         validationSchema={schema}
+        validateOnBlur={false}
       >
-        {({touched, errors, isValid}: FormikProps<FormValues>) => (
+        {() => (
           <Form>
-              <Field name="taskName">
-                {({ 
+            <Field name="taskName">
+              {({ 
                   field,
-                  meta: {
-                    touched,
-                    error
-                  }
+                  meta: { touched, error}
                 }: FieldProps) => (
-                  <InputBar 
-                    textInputProps={{
-                      ...field
-                    }} 
-                    buttonProps={{
-                      type: 'submit',
-
-                    }} 
-                    errorMessage={(touched && error) || undefined}
-                  />
-                )}
-              </Field>
+                <InputBar 
+                  textInputProps={{
+                    ...field
+                  }} 
+                  buttonProps={{
+                    type: 'submit',
+                  }} 
+                  errorMessage={(touched && error) || undefined}
+                />
+              )}
+            </Field>
           </Form>
         )}
       </Formik>
@@ -84,6 +82,7 @@ export default function Home() {
             key={task.id} 
             description={task.description} 
             checked={task.done} 
+            onClick={() => handleToggleTaks(task.id)}
           />
         ))}
       </TaskList>

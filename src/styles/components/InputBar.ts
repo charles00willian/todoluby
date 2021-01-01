@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+`;
 
 export const TextInputContainer = styled.div`
   display: flex;
@@ -15,6 +17,7 @@ export const TextInput = styled.input`
   border-radius: 5px 0px 0px 5px;
   border-color: #eee;
   border-width: 1px;
+  width: 100%;
 `;
 
 export const AddButton = styled.button`
@@ -30,4 +33,5 @@ export const AddButton = styled.button`
 export const ErrorMessage = styled.span`
   color: #f23838;
   margin-top: 5px;
+  font-size: 12px;
 `;

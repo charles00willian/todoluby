@@ -24,14 +24,14 @@ function reducers(
           return { ...state, tasks }
         }
          
-        case TaskListActionTypes.COMPLETE_TASK:  {
+        case TaskListActionTypes.CHANGE_STATUS:  {
           const { id } = action.payload;
           const { tasks } = state;
           
           const index = tasks.findIndex(task => task.id === id);
 
           if(index >= 0) {
-            tasks[index].done = true;
+            tasks[index].done = !tasks[index].done;
           }
 
           return { ...state, tasks }

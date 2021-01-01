@@ -6,7 +6,7 @@ export interface ITaskListState {
 
 export enum TaskListActionTypes {
   ADD_TASK = '@tasklist/ADD_TASK',
-  COMPLETE_TASK = '@tasklist/COMPLETE_TASK',
+  CHANGE_STATUS = '@tasklist/CHANGE_STATUS',
 }
 
 export interface TaskListAction {

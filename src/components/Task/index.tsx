@@ -8,14 +8,16 @@ import {
 export interface TaskProps {
   checked?: boolean;
   description: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 const Task: React.FC<TaskProps> = ({
   checked,
-  description
+  description,
+  onClick
 }) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       {checked ? <MdCheckBox size={22} /> : <MdCheckBoxOutlineBlank size={22}/>}
       <Description>
         {description}
