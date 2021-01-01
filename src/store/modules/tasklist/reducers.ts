@@ -18,7 +18,7 @@ function reducers(
             description,
             id: uuid(),
             done: false,
-            createdDate: new Date(),
+            createdDate: new Date().toString(),
           })
 
           return { ...state, tasks }
