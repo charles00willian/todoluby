@@ -92,8 +92,6 @@ export default function Home() {
         <title>Todo Luby</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      
       <Formik 
         initialValues={{
           taskName: ''
@@ -141,7 +139,6 @@ export default function Home() {
           />
         ))}
       </TaskList>
-    
     </Container>
   )
 }
